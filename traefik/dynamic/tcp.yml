@@ -1,0 +1,18 @@
+# TCP-маршрутизация по SNI: трафик к домену маскировки — в Telemt (TLS passthrough).
+# Домен должен совпадать с censorship.tls_domain в telemt.toml.
+
+tcp:
+  routers:
+    mtproxy:
+      rule: "HostSNI(`1c.ru`)"
+      entryPoints:
+        - websecure
+      service: mtproxy
+      priority: 200
+      tls:
+        passthrough: true
+  services:
+    mtproxy:
+      loadBalancer:
+        servers:
+          - address: "telemt:1234"
