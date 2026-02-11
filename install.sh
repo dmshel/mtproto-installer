@@ -95,8 +95,8 @@ download_and_configure() {
 # --- Запуск контейнеров
 run_compose() {
 	cd "${INSTALL_DIR}"
-	docker-compose pull -q 2>/dev/null || true
-	docker-compose up -d
+	docker compose pull -q 2>/dev/null || true
+	docker compose up -d
 	info "Контейнеры запущены."
 }
 
